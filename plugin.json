@@ -1,0 +1,38 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "rockdesk",
+  "version": "1.0.9",
+  "description": "Let your agent work on your other computers through RockDesk's rds command line: shell with real exit codes, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding. Peer-to-peer by machine ID, no open ports.",
+  "author": {
+    "name": "RockDesk",
+    "email": "dev@rockdesk.io",
+    "url": "https://rockdesk.io"
+  },
+  "homepage": "https://rockdesk.io",
+  "repository": "https://github.com/rockdesk-io/rockdesk-skill",
+  "license": "MIT",
+  "keywords": ["remote-desktop", "remote-access", "ssh-alternative", "automation", "computer-use", "rds"],
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "interface": {
+        "displayName": "RockDesk",
+        "shortDescription": "Work on your other computers: shell, files, screen, mouse and keyboard",
+        "longDescription": "RockDesk gives every machine a 9-digit ID and connects them peer-to-peer with relay fallback, no port forwarding or VPN setup. This plugin teaches the agent RockDesk's rds command line: run commands on another computer and get real exit codes, copy and sync files, take screenshots it can read, click and type, use the clipboard, and forward ports, serial ports and USB devices. RockDesk must be installed on both machines; the machine being controlled decides who may connect.",
+        "developerName": "RockDesk",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://rockdesk.io",
+        "privacyPolicyURL": "https://rockdesk.io/privacy.html",
+        "termsOfServiceURL": "https://rockdesk.io/terms.html",
+        "defaultPrompt": [
+          "Use RockDesk to check how much disk space is left on my office PC.",
+          "Use RockDesk to copy notes.txt to my other computer's desktop and open it."
+        ],
+        "brandColor": "#3B82F6",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}
