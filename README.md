@@ -29,7 +29,13 @@ Demo: [Claude Code drives a Windows PC](https://youtu.be/VIFOqMNGUW8) · [Claude
 Install the skill at https://rockdesk.io/rockdesk-cli.md
 ```
 
-**Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (or your agent's skills folder).
+**Codex:** run this inside Codex, then restart it:
+
+```
+$skill-installer install https://github.com/rockdesk-io/rockdesk-skill/tree/main/skills/rockd-remote-control
+```
+
+**Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex).
 
 You also need RockDesk on both machines: [download](https://rockdesk.io/#download) for Windows, macOS, Linux (x86_64 / arm64) and Android, plus an iOS client. In China use [rockdesk.cn](https://rockdesk.cn/#download).
 
@@ -58,4 +64,4 @@ The skill file, plugin manifests and README in this repository are MIT-licensed 
 
 RockDesk 让 Claude Code、Codex 这些 AI 直接操作你的另一台电脑：跑命令、传文件、截屏、点鼠标、敲键盘，按 ID 点对点连接，不用开端口、不用配 VPN。
 
-安装 skill：在 Claude Code 里输入 `/plugin marketplace add rockdesk-io/rockdesk-skill` 和 `/plugin install rockdesk@rockdesk`，或者直接跟 AI 说「安装 https://rockdesk.io/rockdesk-cli.md 这个 skill」。两台电脑都要装 RockDesk，国内从 [rockdesk.cn](https://rockdesk.cn/#download) 下载。
+安装 skill：在 Claude Code 里输入 `/plugin marketplace add rockdesk-io/rockdesk-skill` 和 `/plugin install rockdesk@rockdesk`，或者直接跟 AI 说「安装 https://rockdesk.io/rockdesk-cli.md 这个 skill」；Codex 用上面那条 `$skill-installer` 命令。两台电脑都要装 RockDesk，国内从 [rockdesk.cn](https://rockdesk.cn/#download) 下载。
