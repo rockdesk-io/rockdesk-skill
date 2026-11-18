@@ -10,6 +10,7 @@
   "plugins": [
     {
       "name": "rockdesk",
+      "displayName": "RockDesk",
       "source": "./",
       "description": "Let your agent work on your other computers through RockDesk's rds command line: shell, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding.",
       "version": "1.0.9",

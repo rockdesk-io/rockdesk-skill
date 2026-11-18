@@ -1,6 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "rockdesk",
+  "displayName": "RockDesk",
   "version": "1.0.9",
   "description": "Let your agent work on your other computers through RockDesk's rds command line: shell with real exit codes, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding. Peer-to-peer by machine ID, no open ports.",
   "author": {
@@ -21,5 +22,10 @@
   "skills": [
     "./skills/rockd-remote-control"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://rockdesk.io/quickstart.html",
+  "supportUrl": "https://rockdesk.io/support.html",
+  "privacyPolicyUrl": "https://rockdesk.io/privacy.html",
+  "termsOfServiceUrl": "https://rockdesk.io/terms.html"
 }
