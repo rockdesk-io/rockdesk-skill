@@ -52,6 +52,12 @@ You also need RockDesk on both machines: [download](https://rockdesk.io/#downloa
 
 The machine being controlled decides who gets in: click to allow, a one-time password, a fixed password, or a key pair shared across your own devices. Your agent can only do what that machine allows.
 
+## Data handling
+
+- Commands, files, screenshots and keystrokes go between your own machines over an end-to-end encrypted connection (QUIC, TLS 1.3). When there is no direct path they pass through a RockDesk relay, which only forwards ciphertext and stores nothing.
+- The RockDesk server sees what it needs to connect devices and check licenses: device IDs, network addresses, and your account email if you log in. It does not see session content.
+- The skill itself only runs the local `rds` command. It sends nothing to Anthropic or any other third party.
+
 ## Pricing
 
 Each device gets a 10-day free trial. After that see [pricing](https://rockdesk.io/pricing.html).
