@@ -1,0 +1,24 @@
+{
+  "name": "rockdesk",
+  "owner": {
+    "name": "RockDesk",
+    "email": "dev@rockdesk.io"
+  },
+  "metadata": {
+    "description": "RockDesk skill: let Claude Code operate your other computers by machine ID."
+  },
+  "plugins": [
+    {
+      "name": "rockdesk",
+      "source": "./",
+      "description": "Let your agent work on your other computers through RockDesk's rds command line: shell, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding.",
+      "version": "1.0.9",
+      "author": {
+        "name": "RockDesk",
+        "email": "dev@rockdesk.io"
+      },
+      "homepage": "https://rockdesk.io",
+      "category": "productivity"
+    }
+  ]
+}
