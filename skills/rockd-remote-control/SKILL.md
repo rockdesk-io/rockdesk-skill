@@ -2,18 +2,12 @@
 name: rockd-remote-control
 description: >-
   Control and automate a remote computer through the RockDesk command line,
-  `rds`, addressed by the computer's 9-digit ID. Run shell commands (one-shot, detached, or
-  persistent sessions), copy / sync / send files, mount a remote directory as a
-  local folder, read and set the remote clipboard, browse / re-send / export
-  clipboard history (this machine's and the peer's; export as Markdown for an
-  LLM to organize and summarize), drive screen / mouse / keyboard, open the
-  remote desktop in a browser, forward TCP ports, serial ports and USB devices,
-  and bring up a VPN (内网穿透) or route traffic out through the peer — all
-  peer-to-peer, no sshd or open inbound port on the remote. Use whenever the
-  user wants to inspect, operate or automate a machine over RockDesk. Triggers:
-  "RockDesk", "rockd", "rds" with a 9-digit ID, "剪贴板历史", "clipboard history", "内网穿透",
-  "挂目录", "mount the remote dir", "screenshot the remote", a 9-digit ID
-  plus an action.
+  `rds`, addressed by its 9-digit ID: shell commands, file copy /
+  sync / mount, screenshots, mouse and keyboard, clipboard and its history,
+  port / serial / USB forwarding, 内网穿透 (VPN). Peer-to-peer, no sshd or open
+  port on the remote. Triggers: "RockDesk", "rockd", "rds" with a 9-digit ID,
+  "剪贴板历史", "内网穿透", "挂目录", "screenshot the remote", a 9-digit ID plus
+  an action, or any request to inspect or operate another machine.
 ---
 
 # RockDesk CLI (`rds`) & Agent Skill
@@ -35,6 +29,15 @@ No GUI window opens. Output and error messages are in Chinese.
 Linux .deb (x86_64: Ubuntu 20.04+, Debian 12+; arm64: Ubuntu 22.04+, Debian 12+), macOS .dmg (Apple silicon or Intel), Android .apk. A web version runs at
 https://rockdesk.io/web/ (https://rockdesk.cn/web/): nothing to install, but it has no `rds`.
 
+**Install this skill:** save this file unchanged as `SKILL.md` in a folder named
+`rockd-remote-control` inside your agent's skills folder:
+
+- Claude Code: `~/.claude/skills/rockd-remote-control/SKILL.md`
+- DeepSeek Harness (`dsh`), Codex and other agents that read the shared folder:
+  `~/.agents/skills/rockd-remote-control/SKILL.md` (Windows:
+  `%USERPROFILE%\.agents\skills\rockd-remote-control\SKILL.md`). dsh does not
+  read `~/.claude/skills`.
+
 ## First: find `rds` and check that it works
 
 `rds` is installed with RockDesk:
@@ -52,7 +55,8 @@ https://rockdesk.io/web/ (https://rockdesk.cn/web/): nothing to install, but it 
   Everything below is written as `$RDS`.
 - **Config dir** (identity, permissions, clipboard history): `~/.config/rockd/`.
   On Windows it is `%APPDATA%\rockd`, or `C:\ProgramData\rockd` for the system
-  service. `--dir <dir>` or `$ROCKD_DIR` overrides it.
+  service; for the Linux system service it is `/var/lib/rockd` (root's `rds`
+  finds it, so run `sudo rds …` there). `--dir <dir>` or `$ROCKD_DIR` overrides it.
 
 ## For agents (read first)
 
@@ -121,16 +125,40 @@ What you can use: everything with the key pair, or when your device is on the
 same RockDesk account and proved a password. Otherwise only the features the peer
 enabled (`$RDS config` there shows them).
 
-Setting up a host from the command line (no GUI needed). On a Linux server:
-`sudo apt install ./rockdesk-*-linux-amd64.deb`, then
-`systemctl --user enable --now rockd` (also `sudo loginctl enable-linger $USER`,
-so it keeps running after you log out). The first start writes a default
-config: the official server, one-time password on. `$RDS status` shows the
-ID; `$RDS otp` prints the current one-time password (`$RDS otp new` makes
-another). For lasting access: `$RDS passwd` (fixed password) and / or
-`$RDS key gen | import | export | clear` (key pair); both work immediately.
-`$RDS config` shows / changes the rest (`ask on|off`, `otp on|off`,
-`feature <name> on|off`, `name`, `port`, `term-keep`); `$RDS login <email>`.
+**Machines without a screen** (servers, robots, dev boards; Linux .deb 1.0.10+):
+
+```
+sudo systemctl enable --now rockd     # system service: starts at boot, config in /var/lib/rockd
+sudo rds status                       # this machine's ID
+sudo rds otp                          # its current one-time password (sudo rds otp new: a fresh one)
+```
+
+- There, people who come in with the one-time password may also use the
+  terminal and port forwarding (file transfer was already on), and "allow when
+  someone connects" is off (nobody is there to click).
+- Fixed password: `sudo rds passwd` (prompts twice; `--clear` removes it).
+- Key pair, like ssh: on your own computer `$RDS key gen` once (later `$RDS key`
+  prints the same public line); on the headless machine
+  `sudo rds authorize "<that line>"`. Your computer then gets in with no
+  password and can use everything.
+- What others may use: `sudo rds config` lists it;
+  `sudo rds config feature <shell|file|fwd|mount|vpn|serial|usb|…> on|off`
+  changes it; `sudo rds config otp off` / `ask on` switch the one-time password
+  / the allow dialog.
+- With a one-time password, prove it once (`RDS_PASSWORD=… $RDS <id> shell -c …`
+  or `$RDS <id> auth`); later commands on the same connection don't need it again.
+
+Setting up a host from the command line (no GUI needed): on a machine without
+a screen use the system service above. On a desktop you can also run the
+per-user daemon without the app: `systemctl --user enable --now rockd` (plus
+`sudo loginctl enable-linger $USER`, so it keeps running after you log out).
+The first start writes a default config: the official server, one-time
+password on. `$RDS status` shows the ID; `$RDS otp` prints the current
+one-time password (`$RDS otp new` makes another). For lasting access:
+`$RDS passwd` (fixed password) and / or `$RDS key gen | import | export | clear`
+(key pair); both work immediately. `$RDS config` shows / changes the rest
+(`ask on|off`, `otp on|off`, `feature <name> on|off`, `name`, `port`,
+`term-keep`); `$RDS login <email>`.
 
 A refusal says what is missing (password, a click, a feature that is off).
 Don't guess passwords. If you're refused, report which of these is missing.

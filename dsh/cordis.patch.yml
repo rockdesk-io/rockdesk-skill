@@ -1,0 +1,4 @@
+# RockDesk skill provider for DeepSeek Harness
+- insert:
+    - id: rockdesk-skill
+      name: dsh-plugin-rockdesk

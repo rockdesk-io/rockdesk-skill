@@ -1,4 +1,8 @@
-# RockDesk skill for Claude Code, Codex and other agents
+# RockDesk skill for Claude Code, Codex, DeepSeek Harness and other agents
+
+```
+npx skills add rockdesk-io/rockdesk-skill
+```
 
 Let your AI agent work on your **other** computers.
 
@@ -16,6 +20,12 @@ Demo: [Claude Code drives a Windows PC](https://youtu.be/VIFOqMNGUW8) · [Claude
 
 ## Install
 
+**Any agent, with the skills CLI** (puts it in `~/.agents/skills` and links it to the agents you pick):
+
+```
+npx skills add rockdesk-io/rockdesk-skill
+```
+
 **Claude Code, as a plugin:**
 
 ```
@@ -23,7 +33,13 @@ Demo: [Claude Code drives a Windows PC](https://youtu.be/VIFOqMNGUW8) · [Claude
 /plugin install rockdesk@rockdesk
 ```
 
-**Or just ask your agent** (Claude Code, Codex, …):
+**DeepSeek Harness (dsh), as a plugin:** install it into the profile you use, then restart that profile:
+
+```
+dsh plugin --profile <profile> add github:rockdesk-io/rockdesk-skill
+```
+
+**Or just ask your agent** (Claude Code, Codex, DeepSeek Harness, …):
 
 ```
 Install the skill at https://rockdesk.io/rockdesk-cli.md
@@ -35,7 +51,7 @@ Install the skill at https://rockdesk.io/rockdesk-cli.md
 $skill-installer install https://github.com/rockdesk-io/rockdesk-skill/tree/main/skills/rockd-remote-control
 ```
 
-**Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex).
+**Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex, DeepSeek Harness — dsh does not read `~/.claude/skills`).
 
 You also need RockDesk on both machines: [download](https://rockdesk.io/#download) for Windows, macOS, Linux (x86_64 / arm64) and Android, plus an iOS client. In China use [rockdesk.cn](https://rockdesk.cn/#download).
 
@@ -68,6 +84,6 @@ The skill file, plugin manifests and README in this repository are MIT-licensed 
 
 ## 中文
 
-RockDesk 让 Claude Code、Codex 这些 AI 直接操作你的另一台电脑：跑命令、传文件、截屏、点鼠标、敲键盘，按 ID 点对点连接，不用开端口、不用配 VPN。
+RockDesk 让 Claude Code、Codex、DeepSeek Harness 这些 AI 直接操作你的另一台电脑：跑命令、传文件、截屏、点鼠标、敲键盘，按 ID 点对点连接，不用开端口、不用配 VPN。
 
-安装 skill：在 Claude Code 里输入 `/plugin marketplace add rockdesk-io/rockdesk-skill` 和 `/plugin install rockdesk@rockdesk`，或者直接跟 AI 说「安装 https://rockdesk.io/rockdesk-cli.md 这个 skill」；Codex 用上面那条 `$skill-installer` 命令。两台电脑都要装 RockDesk，国内从 [rockdesk.cn](https://rockdesk.cn/#download) 下载。
+安装 skill：在 Claude Code 里输入 `/plugin marketplace add rockdesk-io/rockdesk-skill` 和 `/plugin install rockdesk@rockdesk`，或者直接跟 AI 说「安装 https://rockdesk.io/rockdesk-cli.md 这个 skill」；Codex 用上面那条 `$skill-installer` 命令；DeepSeek Harness（dsh）用 `dsh plugin --profile <你的 profile> add github:rockdesk-io/rockdesk-skill` 装成插件，或者把 `skills/rockd-remote-control/` 拷到 `~/.agents/skills/`（dsh 不读 `~/.claude/skills`）；也可以用 `npx skills add rockdesk-io/rockdesk-skill` 一条命令装好。两台电脑都要装 RockDesk，国内从 [rockdesk.cn](https://rockdesk.cn/#download) 下载。
