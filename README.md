@@ -4,6 +4,8 @@
 npx skills add rockdesk-io/rockdesk-skill
 ```
 
+**Needs the RockDesk app on both machines** — the skill only teaches your agent the commands; RockDesk does the work. [Download RockDesk](https://rockdesk.io/#download) (in China: [rockdesk.cn](https://rockdesk.cn/#download)).
+
 Let your AI agent work on your **other** computers.
 
 [RockDesk](https://rockdesk.io) gives every machine a 9-digit ID and connects them peer-to-peer, falling back to a relay when a direct path isn't possible. No port forwarding, no VPN setup, no sshd on the remote. Its command line, `rds`, lets an agent:
@@ -19,6 +21,12 @@ This repository holds the skill that teaches agents to use it.
 Demo: [Claude Code drives a Windows PC](https://youtu.be/VIFOqMNGUW8) · [Claude Code drives a Mac](https://youtu.be/uddhlpvHFV0)
 
 ## Install
+
+### 1. Install RockDesk on both machines
+
+[Download](https://rockdesk.io/#download) for Windows, macOS, Linux (x86_64 / arm64) and Android, plus an iOS client; in China use [rockdesk.cn](https://rockdesk.cn/#download). Install it on this computer and on every computer you want your agent to work on, and note the 9-digit ID the app shows there. New devices start with a free trial. On a Linux machine without a screen: `sudo systemctl enable --now rockd`, then `sudo rds otp` for a one-time password.
+
+### 2. Install the skill in your agent
 
 **Any agent, with the skills CLI** (puts it in `~/.agents/skills` and links it to the agents you pick):
 
@@ -53,7 +61,7 @@ $skill-installer install https://github.com/rockdesk-io/rockdesk-skill/tree/main
 
 **Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex, DeepSeek Harness — dsh does not read `~/.claude/skills`).
 
-You also need RockDesk on both machines: [download](https://rockdesk.io/#download) for Windows, macOS, Linux (x86_64 / arm64) and Android, plus an iOS client. In China use [rockdesk.cn](https://rockdesk.cn/#download).
+If RockDesk isn't installed yet, the skill tells your agent to point you to the download page (or offer to install it for you).
 
 ## Things to ask
 
@@ -83,6 +91,8 @@ Each device gets a 10-day free trial. After that see [pricing](https://rockdesk.
 The skill file, plugin manifests and README in this repository are MIT-licensed ([LICENSE](LICENSE)). RockDesk itself is proprietary software.
 
 ## 中文
+
+**先在两台电脑上装好 RockDesk**（下载：[rockdesk.cn](https://rockdesk.cn/#download)）：skill 只是教 AI 怎么用命令，真正干活的是 RockDesk。
 
 RockDesk 让 Claude Code、Codex、DeepSeek Harness 这些 AI 直接操作你的另一台电脑：跑命令、传文件、截屏、点鼠标、敲键盘，按 ID 点对点连接，不用开端口、不用配 VPN。
 

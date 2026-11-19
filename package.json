@@ -1,7 +1,7 @@
 {
   "name": "dsh-plugin-rockdesk",
   "version": "1.0.10",
-  "description": "RockDesk for DeepSeek Harness: a skill that lets dsh work on your other computers through RockDesk's rds command line — shell with real exit codes, files, screenshots, mouse and keyboard, clipboard, port forwarding. Peer-to-peer by 9-digit ID, no open ports.",
+  "description": "RockDesk for DeepSeek Harness: a skill that lets dsh work on your other computers through RockDesk's rds command line — shell with real exit codes, files, screenshots, mouse and keyboard, clipboard, port forwarding. Peer-to-peer by 9-digit ID, no open ports. Needs the RockDesk app on both machines: https://rockdesk.io/#download (China: https://rockdesk.cn/#download)",
   "type": "module",
   "main": "dsh/index.js",
   "files": [
@@ -11,7 +11,16 @@
     "assets/icon-128.png"
   ],
   "icon": "./assets/icon-128.png",
-  "keywords": ["dsh-plugin", "dsh", "deepseek-harness", "agent-skills", "remote-desktop", "remote-access", "rockdesk", "rds"],
+  "keywords": [
+    "dsh-plugin",
+    "dsh",
+    "deepseek-harness",
+    "agent-skills",
+    "remote-desktop",
+    "remote-access",
+    "rockdesk",
+    "rds"
+  ],
   "homepage": "https://rockdesk.io",
   "repository": {
     "type": "git",
