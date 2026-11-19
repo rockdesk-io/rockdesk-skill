@@ -5,15 +5,15 @@
     "email": "dev@rockdesk.io"
   },
   "metadata": {
-    "description": "RockDesk skill: let Claude Code operate your other computers by machine ID."
+    "description": "RockDesk skill: let Claude Code operate your other computers by machine ID. Needs the RockDesk app on both machines: https://rockdesk.io/#download (in China: https://rockdesk.cn/#download)."
   },
   "plugins": [
     {
       "name": "rockdesk",
       "displayName": "RockDesk",
       "source": "./",
-      "description": "Let your agent work on your other computers through RockDesk's rds command line: shell, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding.",
-      "version": "1.0.10",
+      "description": "Let your agent work on your other computers through RockDesk's rds command line: shell, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding. Needs the RockDesk app on both machines: https://rockdesk.io/#download (in China: https://rockdesk.cn/#download).",
+      "version": "1.0.11",
       "author": {
         "name": "RockDesk",
         "email": "dev@rockdesk.io"

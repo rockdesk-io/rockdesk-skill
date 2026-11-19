@@ -1,16 +1,19 @@
 ---
 name: rockd-remote-control
 description: >-
-  Control and automate a remote computer through the RockDesk command line,
-  `rds`, addressed by its 9-digit ID: shell commands, file copy /
-  sync / mount, screenshots, mouse and keyboard, clipboard and its history,
-  port / serial / USB forwarding, 内网穿透 (VPN). Peer-to-peer, no sshd or open
-  port on the remote. Triggers: "RockDesk", "rockd", "rds" with a 9-digit ID,
-  "剪贴板历史", "内网穿透", "挂目录", "screenshot the remote", a 9-digit ID plus
-  an action, or any request to inspect or operate another machine.
+  Control a remote computer with the RockDesk command line `rds`, by its
+  9-digit ID: shell, files (copy / sync / mount), screenshots, mouse and
+  keyboard, clipboard, port / serial / USB forwarding, 内网穿透 (VPN). Needs the
+  RockDesk app on both machines: if `rds` is missing, send the user to
+  https://rockdesk.io/#download first. Triggers: "RockDesk", "rds" with a
+  9-digit ID, "剪贴板历史", "内网穿透", "挂目录", "screenshot the remote", a 9-digit ID
+  plus an action, or any request to operate another machine.
 ---
 
 # RockDesk CLI (`rds`) & Agent Skill
+
+> **Needs the RockDesk app on both machines.** Download it at
+> https://rockdesk.io/#download (in China: https://rockdesk.cn/#download).
 
 RockDesk is a cross-platform remote-access tool. Its engine, rockd, comes as a
 background daemon (`rockd`, also running inside the app), the app, and a
@@ -25,52 +28,29 @@ punch through, and through the server's relay otherwise. The first command to
 a peer takes a moment (connect, maybe authorize); the rest are near-instant.
 No GUI window opens. Output and error messages are in Chinese.
 
-**Get it — required on both machines:** https://rockdesk.io/#download (in China: https://rockdesk.cn/#download) — Windows installer,
-Linux .deb (x86_64: Ubuntu 20.04+, Debian 12+; arm64: Ubuntu 22.04+, Debian 12+), macOS .dmg (Apple silicon or Intel), Android .apk. A web version runs at
-https://rockdesk.io/web/ (https://rockdesk.cn/web/): nothing to install, but it has no `rds`.
-
-**Install this skill:** save this file unchanged as `SKILL.md` in a folder named
-`rockd-remote-control` inside your agent's skills folder:
-
-- Claude Code: `~/.claude/skills/rockd-remote-control/SKILL.md`
-- Gemini CLI: `~/.gemini/skills/rockd-remote-control/SKILL.md`
-- DeepSeek Harness (`dsh`), Codex and other agents that read the shared folder:
-  `~/.agents/skills/rockd-remote-control/SKILL.md` (Windows:
-  `%USERPROFILE%\.agents\skills\rockd-remote-control\SKILL.md`). dsh does not
-  read `~/.claude/skills`.
-
-**Or connect it as an MCP server:** `rds mcp` (1.0.3 and later) is an MCP server over
-stdio with the same abilities as tools: `status`, `devices`, `ping`, `shell`, `spawn`,
-`ls`, `copy`, `info`, `screenshot`, `click`, `move`, `scroll`, `type_text`, `key`,
-`clipboard_get`, `clipboard_set`, `forward`, `unforward`. Screenshots come back as
-images (long edge ≤ 1280 px) and click coordinates are read off the latest
-screenshot. When the MCP tools are available, use them; this document still
-explains what each one does.
-
-- Claude Code: `claude mcp add -s user rockdesk -- rds mcp`
-- Codex: `codex mcp add rockdesk -- rds mcp`
-- Gemini CLI, Cursor, Claude Desktop and other MCP clients: an stdio server whose
-  command is `rds` and args `["mcp"]`, e.g.
-  `{"mcpServers": {"rockdesk": {"command": "rds", "args": ["mcp"]}}}`
-- `rds` is not on the PATH on macOS and Windows: use
-  `/Applications/rockd.app/Contents/MacOS/rds` or `C:\Program Files\rockd\rds.exe`.
-
 ## First: is RockDesk installed?
 
-This skill only teaches the commands. The work is done by the RockDesk app,
-which must be installed and running on **both** machines: this one (where `rds`
-runs) and every machine you want to control.
+**Before your first `rds` command, check that RockDesk is installed and running
+on this machine** (`rds status`, see the next section). This skill only teaches
+the commands. The work is done by the RockDesk app, which must be installed and
+running on **both** machines: this one (where `rds` runs) and every machine you
+want to control.
 
 - **Not installed here** (`rds` isn't found and there is no RockDesk app, or
-  `rds status` can't reach the background service after starting the app): tell
-  the user this skill needs RockDesk and give them the download page,
-  https://rockdesk.io/#download (in China: https://rockdesk.cn/#download). The
+  `rds status` can't reach the background service after starting the app):
+  stop and tell the user, in their language, that this needs the RockDesk app
+  on this computer and on the one they want to control, and give them the
+  download page: **https://rockdesk.io/#download** (in China:
+  **https://rockdesk.cn/#download**). There are a Windows installer, Linux
+  .deb packages (x86_64: Ubuntu 20.04+, Debian 12+; arm64: Ubuntu 22.04+,
+  Debian 12+), macOS .dmg (Apple silicon or Intel) and an Android .apk. The
   current package links are in https://rockdesk.io/rockd-latest.json (in China:
   https://rockdesk.cn/rockd-latest.json), under `files`: `windows`, `macos`
   (Apple silicon), `macos-x86_64`, `linux-amd64`, `linux-arm64`, `android`. You may offer to download and install it for them,
   but ask first. Windows: run the installer. macOS: open the .dmg, drag the app
   into Applications and open it once. Linux: `sudo apt install ./<file>.deb`.
-  New devices start with a free trial.
+  New devices start with a free trial. The web version at
+  https://rockdesk.io/web/ is for people and has no `rds`.
 - **On the machine to control:** RockDesk has to be installed there too. The
   user reads its 9-digit ID in the app and decides how you may get in (see
   Authorization below). A Linux machine without a screen:
@@ -433,3 +413,36 @@ $RDS usb | usb list | usb detach <n|busid>     Attached devices / this machine's
   `$RDS <id> clip history send n`.
 - **Get a screenshot of the peer:** `$RDS <id> screenshot -o shot.png`, then
   read `shot.png`.
+
+## Installing this skill, or using MCP instead
+
+**Install this skill:** save this file unchanged as `SKILL.md` in a folder named
+`rockd-remote-control` inside your agent's skills folder:
+
+- Claude Code: `~/.claude/skills/rockd-remote-control/SKILL.md`
+- Gemini CLI: `~/.gemini/skills/rockd-remote-control/SKILL.md`
+- DeepSeek Harness (`dsh`), Codex and other agents that read the shared folder:
+  `~/.agents/skills/rockd-remote-control/SKILL.md` (Windows:
+  `%USERPROFILE%\.agents\skills\rockd-remote-control\SKILL.md`). dsh does not
+  read `~/.claude/skills`.
+
+**Right after installing the skill, check RockDesk itself** (see "First: is RockDesk
+installed?" at the top): if `rds` is not there yet, tell the user the skill needs the
+RockDesk app on both machines and give them https://rockdesk.io/#download (in China:
+https://rockdesk.cn/#download). Without RockDesk the skill can do nothing.
+
+**Or connect it as an MCP server:** `rds mcp` (1.0.3 and later) is an MCP server over
+stdio with the same abilities as tools: `status`, `devices`, `ping`, `shell`, `spawn`,
+`ls`, `copy`, `info`, `screenshot`, `click`, `move`, `scroll`, `type_text`, `key`,
+`clipboard_get`, `clipboard_set`, `forward`, `unforward`. Screenshots come back as
+images (long edge ≤ 1280 px) and click coordinates are read off the latest
+screenshot. When the MCP tools are available, use them; this document still
+explains what each one does.
+
+- Claude Code: `claude mcp add -s user rockdesk -- rds mcp`
+- Codex: `codex mcp add rockdesk -- rds mcp`
+- Gemini CLI, Cursor, Claude Desktop and other MCP clients: an stdio server whose
+  command is `rds` and args `["mcp"]`, e.g.
+  `{"mcpServers": {"rockdesk": {"command": "rds", "args": ["mcp"]}}}`
+- `rds` is not on the PATH on macOS and Windows: use
+  `/Applications/rockd.app/Contents/MacOS/rds` or `C:\Program Files\rockd\rds.exe`.
