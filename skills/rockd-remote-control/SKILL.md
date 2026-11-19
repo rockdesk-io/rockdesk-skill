@@ -39,6 +39,22 @@ https://rockdesk.io/web/ (https://rockdesk.cn/web/): nothing to install, but it 
   `%USERPROFILE%\.agents\skills\rockd-remote-control\SKILL.md`). dsh does not
   read `~/.claude/skills`.
 
+**Or connect it as an MCP server:** `rds mcp` (1.0.3 and later) is an MCP server over
+stdio with the same abilities as tools: `status`, `devices`, `ping`, `shell`, `spawn`,
+`ls`, `copy`, `info`, `screenshot`, `click`, `move`, `scroll`, `type_text`, `key`,
+`clipboard_get`, `clipboard_set`, `forward`, `unforward`. Screenshots come back as
+images (long edge ≤ 1280 px) and click coordinates are read off the latest
+screenshot. When the MCP tools are available, use them; this document still
+explains what each one does.
+
+- Claude Code: `claude mcp add -s user rockdesk -- rds mcp`
+- Codex: `codex mcp add rockdesk -- rds mcp`
+- Gemini CLI, Cursor, Claude Desktop and other MCP clients: an stdio server whose
+  command is `rds` and args `["mcp"]`, e.g.
+  `{"mcpServers": {"rockdesk": {"command": "rds", "args": ["mcp"]}}}`
+- `rds` is not on the PATH on macOS and Windows: use
+  `/Applications/rockd.app/Contents/MacOS/rds` or `C:\Program Files\rockd\rds.exe`.
+
 ## First: is RockDesk installed?
 
 This skill only teaches the commands. The work is done by the RockDesk app,
