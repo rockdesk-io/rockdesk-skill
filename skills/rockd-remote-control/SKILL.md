@@ -43,14 +43,22 @@ want to control.
   download page: **https://rockdesk.io/#download** (in China:
   **https://rockdesk.cn/#download**). There are a Windows installer, Linux
   .deb packages (x86_64: Ubuntu 20.04+, Debian 12+; arm64: Ubuntu 22.04+,
-  Debian 12+), macOS .dmg (Apple silicon or Intel) and an Android .apk. The
-  current package links are in https://rockdesk.io/rockd-latest.json (in China:
-  https://rockdesk.cn/rockd-latest.json), under `files`: `windows`, `macos`
-  (Apple silicon), `macos-x86_64`, `linux-amd64`, `linux-arm64`, `android`. You may offer to download and install it for them,
-  but ask first. Windows: run the installer. macOS: open the .dmg, drag the app
-  into Applications and open it once. Linux: `sudo apt install ./<file>.deb`.
-  New devices start with a free trial. The web version at
-  https://rockdesk.io/web/ is for people and has no `rds`.
+  Debian 12+), macOS .dmg (Apple silicon or Intel) and an Android .apk.
+  Direct links that always point to the newest release (in China, use
+  rockdesk.cn instead of rockdesk.io in them):
+  - Windows: https://rockdesk.io/download/latest/windows (run the installer)
+  - macOS, Apple silicon: https://rockdesk.io/download/latest/macos; Intel:
+    https://rockdesk.io/download/latest/macos-x86_64 (open the .dmg, drag the
+    app into Applications and open it once)
+  - Linux x86_64: https://rockdesk.io/download/latest/linux-amd64; arm64:
+    https://rockdesk.io/download/latest/linux-arm64 (a .deb:
+    `curl -fL -o rockdesk.deb https://rockdesk.io/download/latest/linux-amd64 && sudo apt install ./rockdesk.deb`)
+  - Android: https://rockdesk.io/download/latest/android (an .apk)
+
+  You may offer to download and install it for them, but ask first. The version
+  and release notes are in https://rockdesk.io/rockd-latest.json. New devices
+  start with a free trial. The web version at https://rockdesk.io/web/ is for
+  people and has no `rds`.
 - **On the machine to control:** RockDesk has to be installed there too. The
   user reads its 9-digit ID in the app and decides how you may get in (see
   Authorization below). A Linux machine without a screen:
