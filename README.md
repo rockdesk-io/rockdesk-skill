@@ -1,4 +1,4 @@
-# RockDesk skill for Claude Code, Codex, DeepSeek Harness and other agents
+# RockDesk skill for Claude Code, Codex, Gemini CLI, DeepSeek Harness and other agents
 
 ```
 npx skills add rockdesk-io/rockdesk-skill
@@ -59,7 +59,7 @@ Install the skill at https://rockdesk.io/rockdesk-cli.md
 $skill-installer install https://github.com/rockdesk-io/rockdesk-skill/tree/main/skills/rockd-remote-control
 ```
 
-**Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex, DeepSeek Harness — dsh does not read `~/.claude/skills`).
+**Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (Claude Code), `~/.gemini/skills/` (Gemini CLI) or `~/.agents/skills/` (Codex, DeepSeek Harness — dsh does not read `~/.claude/skills`).
 
 If RockDesk isn't installed yet, the skill tells your agent to point you to the download page (or offer to install it for you).
 

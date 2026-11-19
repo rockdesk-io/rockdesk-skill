@@ -33,6 +33,7 @@ https://rockdesk.io/web/ (https://rockdesk.cn/web/): nothing to install, but it 
 `rockd-remote-control` inside your agent's skills folder:
 
 - Claude Code: `~/.claude/skills/rockd-remote-control/SKILL.md`
+- Gemini CLI: `~/.gemini/skills/rockd-remote-control/SKILL.md`
 - DeepSeek Harness (`dsh`), Codex and other agents that read the shared folder:
   `~/.agents/skills/rockd-remote-control/SKILL.md` (Windows:
   `%USERPROFILE%\.agents\skills\rockd-remote-control\SKILL.md`). dsh does not
