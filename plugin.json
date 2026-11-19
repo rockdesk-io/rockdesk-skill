@@ -11,27 +11,52 @@
   "homepage": "https://rockdesk.io",
   "repository": "https://github.com/rockdesk-io/rockdesk-skill",
   "license": "MIT",
-  "keywords": ["remote-desktop", "remote-access", "ssh-alternative", "automation", "computer-use", "rds"],
+  "keywords": [
+    "remote-desktop",
+    "remote-access",
+    "ssh-alternative",
+    "automation",
+    "computer-use",
+    "rds"
+  ],
   "extensions": {
     "com.openai": {
       "requires_local_executor": true,
       "interface": {
         "displayName": "RockDesk",
-        "shortDescription": "Work on your other computers: shell, files, screen, mouse and keyboard",
-        "longDescription": "RockDesk gives every machine a 9-digit ID and connects them peer-to-peer with relay fallback, no port forwarding or VPN setup. This plugin teaches the agent RockDesk's rds command line: run commands on another computer and get real exit codes, copy and sync files, take screenshots it can read, click and type, use the clipboard, and forward ports, serial ports and USB devices. RockDesk must be installed on both machines; the machine being controlled decides who may connect.",
+        "shortDescription": "Control your other computers",
+        "longDescription": "RockDesk gives every machine a 9-digit ID and connects them peer-to-peer with relay fallback, no port forwarding or VPN setup. This plugin teaches the agent RockDesk's rds command line: run commands on another computer and get real exit codes, copy and sync files, take screenshots it can read, click and type, use the clipboard, and forward ports, serial ports and USB devices. For people who use more than one computer, or look after a few, and want the agent to do the work on those machines. Limits: RockDesk must be installed and running on both machines (free trial, then a paid pass); the machine being controlled decides who may connect; the plugin runs rds on your own computer, so it needs a thread that runs locally.",
         "developerName": "RockDesk",
         "category": "Productivity",
-        "capabilities": ["Read", "Write"],
+        "capabilities": [
+          "Run commands on another computer",
+          "Copy and sync files",
+          "Take and read screenshots",
+          "Click and type",
+          "Use the clipboard",
+          "Forward ports, serial ports and USB"
+        ],
         "websiteURL": "https://rockdesk.io",
         "privacyPolicyURL": "https://rockdesk.io/privacy.html",
         "termsOfServiceURL": "https://rockdesk.io/terms.html",
         "defaultPrompt": [
           "Use RockDesk to check how much disk space is left on my office PC.",
-          "Use RockDesk to copy notes.txt to my other computer's desktop and open it."
+          "Use RockDesk to copy notes.txt to my other computer's desktop and open it.",
+          "Use RockDesk to take a screenshot of my other computer and tell me what is on screen."
         ],
         "brandColor": "#3B82F6",
         "composerIcon": "./assets/icon.png",
-        "logo": "./assets/logo.png"
+        "logo": "./assets/logo.png",
+        "supportURL": "https://rockdesk.io/support.html"
+      },
+      "publication": {
+        "release_notes": "First release: RockDesk's rds command line as a skill: shell, files, screenshots, mouse and keyboard, clipboard, and port / serial / USB forwarding on your other computers.",
+        "translations": {
+          "zh-CN": {
+            "subtitle": "操作你的其他电脑",
+            "description": "RockDesk 给每台电脑一个 9 位 ID，点对点直连，连不通自动走中继，不用开端口、不用配 VPN。这个插件教会 agent 用 RockDesk 的 rds 命令行：在另一台电脑上执行命令并拿到真实的退出码、拷贝和同步文件、截屏并看懂屏幕、点鼠标和打字、读写剪贴板，以及转发端口、串口和 USB 设备。两台电脑都要装 RockDesk（先免费试用，之后付费）；被控的那台决定谁能连；rds 在你自己的电脑上执行，所以要在本机运行的对话里用。"
+          }
+        }
       }
     }
   }

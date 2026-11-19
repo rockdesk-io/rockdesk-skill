@@ -41,6 +41,12 @@ npx skills add rockdesk-io/rockdesk-skill
 /plugin install rockdesk@rockdesk
 ```
 
+**Gemini CLI, as an extension:**
+
+```
+gemini extensions install https://github.com/rockdesk-io/rockdesk-skill
+```
+
 **DeepSeek Harness (dsh), as a plugin:** install it into the profile you use, then restart that profile:
 
 ```
@@ -53,7 +59,14 @@ dsh plugin --profile <profile> add github:rockdesk-io/rockdesk-skill
 Install the skill at https://rockdesk.io/rockdesk-cli.md
 ```
 
-**Codex:** run this inside Codex, then restart it:
+**Codex, as a plugin:**
+
+```
+codex plugin marketplace add rockdesk-io/rockdesk-skill
+codex plugin add rockdesk@rockdesk
+```
+
+**Codex, skill only:** run this inside Codex, then restart it:
 
 ```
 $skill-installer install https://github.com/rockdesk-io/rockdesk-skill/tree/main/skills/rockd-remote-control
@@ -105,4 +118,4 @@ The skill file, plugin manifests and README in this repository are MIT-licensed 
 
 RockDesk 让 Claude Code、Codex、DeepSeek Harness 这些 AI 直接操作你的另一台电脑：跑命令、传文件、截屏、点鼠标、敲键盘，按 ID 点对点连接，不用开端口、不用配 VPN。
 
-安装 skill：在 Claude Code 里输入 `/plugin marketplace add rockdesk-io/rockdesk-skill` 和 `/plugin install rockdesk@rockdesk`，或者直接跟 AI 说「安装 https://rockdesk.io/rockdesk-cli.md 这个 skill」；Codex 用上面那条 `$skill-installer` 命令；DeepSeek Harness（dsh）用 `dsh plugin --profile <你的 profile> add github:rockdesk-io/rockdesk-skill` 装成插件，或者把 `skills/rockd-remote-control/` 拷到 `~/.agents/skills/`（dsh 不读 `~/.claude/skills`）；也可以用 `npx skills add rockdesk-io/rockdesk-skill` 一条命令装好。不想装 skill 也行，直接接 MCP：`claude mcp add -s user rockdesk -- rds mcp`（Codex 是 `codex mcp add rockdesk -- rds mcp`），skill 和 MCP 爱用哪个用哪个。两台电脑都要装 RockDesk，国内从 [rockdesk.cn](https://rockdesk.cn/#download) 下载。
+安装 skill：在 Claude Code 里输入 `/plugin marketplace add rockdesk-io/rockdesk-skill` 和 `/plugin install rockdesk@rockdesk`，或者直接跟 AI 说「安装 https://rockdesk.io/rockdesk-cli.md 这个 skill」；Codex 用 `codex plugin marketplace add rockdesk-io/rockdesk-skill` 和 `codex plugin add rockdesk@rockdesk` 装成插件（或者上面那条 `$skill-installer` 命令）；Gemini CLI 用 `gemini extensions install https://github.com/rockdesk-io/rockdesk-skill` 装成扩展；DeepSeek Harness（dsh）用 `dsh plugin --profile <你的 profile> add github:rockdesk-io/rockdesk-skill` 装成插件，或者把 `skills/rockd-remote-control/` 拷到 `~/.agents/skills/`（dsh 不读 `~/.claude/skills`）；也可以用 `npx skills add rockdesk-io/rockdesk-skill` 一条命令装好。不想装 skill 也行，直接接 MCP：`claude mcp add -s user rockdesk -- rds mcp`（Codex 是 `codex mcp add rockdesk -- rds mcp`），skill 和 MCP 爱用哪个用哪个。两台电脑都要装 RockDesk，国内从 [rockdesk.cn](https://rockdesk.cn/#download) 下载。
