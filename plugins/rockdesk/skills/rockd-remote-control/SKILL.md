@@ -183,7 +183,7 @@ per-user daemon without the app: `systemctl --user enable --now rockd` (plus
 The first start writes a default config: the official server, one-time
 password on. `$RDS status` shows the ID; `$RDS otp` prints the current
 one-time password (`$RDS otp new` makes another). For lasting access:
-`$RDS passwd` (fixed password) and / or `$RDS key gen | import | export | clear`
+`$RDS passwd` (fixed password) and / or `$RDS key gen`, `$RDS key import`, `$RDS key export`, `$RDS key clear`
 (key pair); both work immediately. `$RDS config` shows / changes the rest
 (`ask on|off`, `otp on|off`, `feature <name> on|off`, `name`, `port`,
 `term-keep`); `$RDS login <email>`.
@@ -225,7 +225,7 @@ $RDS <id> cp <src> <dst>
     Exactly one side is the peer's, prefixed with ':'.
       upload:   $RDS <id> cp ./a.tgz :/home/u/a.tgz
       download: $RDS <id> cp :/etc/hosts ./hosts
-    Folders are copied recursively (scp rules). Re-running an interrupted copy of a file of 8 MB or
+    Folders are copied recursively (like cp -r). Re-running an interrupted copy of a file of 8 MB or
     more resumes where it stopped.
 $RDS <id> sync [--delete] [--dry-run] <src> <dst>
     One-way folder sync (one side ':'-prefixed). Only missing or changed files go over (size +
@@ -266,8 +266,8 @@ $RDS <id> clip set --image a.png     Put an image on it.
 $RDS <id> clip sync                  Keep both clipboards in sync until Ctrl-C (for humans).
 ```
 
-Alternative spellings also work: `clipboard get | set <text> |
-get-image [file] | set-image <file>`.
+Alternative spellings also work: `$RDS <id> clipboard get`, `$RDS <id> clipboard set <text>`,
+`$RDS <id> clipboard get-image [file]` and `$RDS <id> clipboard set-image <file>`.
 
 ## Clipboard history (剪贴板历史)
 
