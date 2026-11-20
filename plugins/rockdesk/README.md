@@ -25,6 +25,17 @@ In Claude Code 2.1.275 or later:
 Then give Claude Code the 9-digit ID of the machine you want it to work on. The
 machine being controlled decides who may connect and what they may use.
 
+## What leaves your computer
+
+The plugin is one skill (instructions); it has no MCP server, hooks or scripts.
+When you ask Claude Code to work on another machine, the commands, files,
+screenshots, clipboard text and mouse / keyboard input it sends go to your own
+machine with that ID over an encrypted connection: directly when possible,
+otherwise through a RockDesk relay server, which forwards the end-to-end
+encrypted traffic and cannot read it. RockDesk keeps connection records (device
+IDs, times, direct or relayed, duration; up to 90 days), not their content.
+Details: https://rockdesk.io/privacy.html
+
 ## More
 
 - Repository, other agents (Codex, Gemini CLI, DeepSeek Harness) and the MCP
