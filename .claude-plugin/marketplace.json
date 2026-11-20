@@ -11,7 +11,7 @@
     {
       "name": "rockdesk",
       "displayName": "RockDesk",
-      "source": "./",
+      "source": "./plugins/rockdesk",
       "description": "Let your agent work on your other computers through RockDesk's rds command line: shell, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding. Needs the RockDesk app on both machines: https://rockdesk.io/#download (in China: https://rockdesk.cn/#download).",
       "version": "1.0.11",
       "author": {

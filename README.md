@@ -36,12 +36,17 @@ Direct links that always point to the newest release: [Windows](https://rockdesk
 npx skills add rockdesk-io/rockdesk-skill
 ```
 
-**Claude Code, as a plugin:**
+**Claude Code, as a plugin** (2.1.275 or later, one step):
 
 ```
-/plugin marketplace add rockdesk-io/rockdesk-skill
-/plugin install rockdesk@rockdesk
+/plugin install rockdesk --marketplace rockdesk-io/rockdesk-skill
 ```
+
+Older versions: `/plugin marketplace add rockdesk-io/rockdesk-skill`, then `/plugin install rockdesk@rockdesk`.
+The plugin lives in [`plugins/rockdesk/`](plugins/rockdesk/): Claude's plugin directory accepts only Markdown, text, JSON
+and images in a plugin folder, so it is kept apart from the files for other agents. Its copy of the skill is the same
+as [`skills/rockd-remote-control/SKILL.md`](skills/rockd-remote-control/SKILL.md) except that it points to the install
+guide instead of a one-line Linux install, and lets the user type passwords into `rds <id> auth` themselves.
 
 **Gemini CLI, as an extension:**
 

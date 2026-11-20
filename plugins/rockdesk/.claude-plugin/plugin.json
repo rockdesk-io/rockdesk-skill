@@ -1,5 +1,4 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "rockdesk",
   "displayName": "RockDesk",
   "version": "1.0.11",
