@@ -1,5 +1,7 @@
 # RockDesk skill and MCP server for Claude Code, Codex, Gemini CLI, DeepSeek Harness and other agents
 
+[![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/rockdesk-io/rockdesk-skill) [![Official MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.rockdesk%2Frockdesk-2563eb)](https://rockdesk.io/ai-agents.html) [![Open VSX](https://img.shields.io/badge/Open%20VSX-rockdesk.rockdesk-0f766e)](https://open-vsx.org/extension/rockdesk/rockdesk) [![Homebrew Cask](https://img.shields.io/badge/Homebrew-rockdesk--io%2Ftap-d97706)](https://github.com/rockdesk-io/homebrew-tap)
+
 ```
 npx skills add rockdesk-io/rockdesk-skill
 ```
@@ -19,6 +21,24 @@ Let your AI agent work on your **other** computers.
 This repository holds the skill that teaches agents to use it.
 
 Demo: [Claude Code drives a Windows PC](https://youtu.be/VIFOqMNGUW8) · [Claude Code drives a Mac](https://youtu.be/uddhlpvHFV0)
+
+## Quickstart by AI Agent / Client
+
+| Agent / Client | Recommended Install |
+|---|---|
+| **Claude Code** | `claude mcp add -s user rockdesk -- rds mcp` or `/plugin install rockdesk --marketplace rockdesk-io/rockdesk-skill` |
+| **OpenAI Codex CLI** | `codex mcp add rockdesk -- rds mcp` or `codex plugin marketplace add rockdesk-io/rockdesk-skill` |
+| **Gemini CLI** | `gemini extensions install https://github.com/rockdesk-io/rockdesk-skill` |
+| **DeepSeek Harness (`dsh`)** | `dsh plugin --profile <profile> add github:rockdesk-io/rockdesk-skill` |
+| **TRAE / Cursor / Windsurf / Qwen** | `npx skills add rockdesk-io/rockdesk-skill` or stdio MCP `{"command": "rds", "args": ["mcp"]}` |
+| **WorkBuddy** | Search **RockDesk** in WorkBuddy Open Platform or install via `npx skills add rockdesk-io/rockdesk-skill` |
+
+## Guides & Benchmarks
+
+- [Mac mini Remote Control & Bidirectional AI Hub](https://rockdesk.io/mac-mini-remote.html) — connect into your always-on Mac mini AND let Claude Code / Codex on it operate your Windows PC, Linux servers, laptops, and Android phones via `rds mcp`.
+- [1-RTT P2P FUSE Directory Mount vs SSHFS](https://rockdesk.io/vs-sshfs.html) — measured 4.8× faster small-file writes, 2.9× faster reads, and 35× faster `stat()` at 60 ms RTT.
+- [Remote Serial (`/dev/ttyUSB`), USB/IP, Headless ARM64 & ESP32-S3](https://rockdesk.io/remote-serial-usb.html) — remote hardware labs, Wake-on-LAN, GPIO, and physical touchscreen `ask` approval.
+- [RockDesk vs AnyDesk](https://rockdesk.io/vs-anydesk.html) · [RockDesk vs RustDesk](https://rockdesk.io/vs-rustdesk.html)
 
 ## Install
 
@@ -126,3 +146,6 @@ The skill file, plugin manifests and README in this repository are MIT-licensed 
 RockDesk 让 Claude Code、Codex、DeepSeek Harness 这些 AI 直接操作你的另一台电脑：跑命令、传文件、截屏、点鼠标、敲键盘，按 ID 点对点连接，不用开端口、不用配 VPN。
 
 安装 skill：在 Claude Code 里输入 `/plugin marketplace add rockdesk-io/rockdesk-skill` 和 `/plugin install rockdesk@rockdesk`，或者直接跟 AI 说「安装 https://rockdesk.io/rockdesk-cli.md 这个 skill」；Codex 用 `codex plugin marketplace add rockdesk-io/rockdesk-skill` 和 `codex plugin add rockdesk@rockdesk` 装成插件（或者上面那条 `$skill-installer` 命令）；Gemini CLI 用 `gemini extensions install https://github.com/rockdesk-io/rockdesk-skill` 装成扩展；DeepSeek Harness（dsh）用 `dsh plugin --profile <你的 profile> add github:rockdesk-io/rockdesk-skill` 装成插件，或者把 `skills/rockd-remote-control/` 拷到 `~/.agents/skills/`（dsh 不读 `~/.claude/skills`）；也可以用 `npx skills add rockdesk-io/rockdesk-skill` 一条命令装好。不想装 skill 也行，直接接 MCP：`claude mcp add -s user rockdesk -- rds mcp`（Codex 是 `codex mcp add rockdesk -- rds mcp`），skill 和 MCP 爱用哪个用哪个。两台电脑都要装 RockDesk，国内从 [rockdesk.cn](https://rockdesk.cn/#download) 下载；固定的最新版直链是 `https://rockdesk.cn/download/latest/<平台>`，平台写 windows、macos、macos-x86_64、linux-amd64、linux-arm64 或 android。
+
+- **专题文档与实测**：[AI 远程控制总览](https://rockdesk.cn/ai-agents.html) · [Mac mini 双向 AI 中控指南](https://rockdesk.cn/mac-mini-remote.html) · [1-RTT 目录挂载对比 SSHFS（快 4.8–35 倍）](https://rockdesk.cn/vs-sshfs.html) · [远程串口 / USB / ARM64 / ESP32-S3](https://rockdesk.cn/remote-serial-usb.html)
+- **macOS Homebrew 一行安装**：`brew tap rockdesk-io/tap && brew install --cask rockdesk`；TRAE / WorkBuddy / 千问等支持 Skill 或标准 stdio MCP 的客户端均可直接通过 `npx skills add rockdesk-io/rockdesk-skill` 或 `rds mcp` 接入。
