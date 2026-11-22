@@ -1,0 +1,49 @@
+{
+  "name": "rockdesk-mcp",
+  "version": "1.0.18",
+  "description": "MCP server for AI agents to control your other computers by a 9-digit RockDesk ID: shell, files, screenshots, mouse and keyboard on Windows, macOS, Linux and Android. Works with Claude Code, Codex, Gemini CLI, DeepSeek Harness, Cursor and Trae. Peer to peer, no public IP or port forwarding. 让 AI 按 ID 远程控制另一台电脑。",
+  "bin": {
+    "rockdesk-mcp": "bin/rockdesk-mcp.js"
+  },
+  "files": [
+    "bin/rockdesk-mcp.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "mcpName": "io.rockdesk/rockdesk",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "remote-desktop",
+    "remote-control",
+    "remote-access",
+    "ai-agent",
+    "computer-use",
+    "claude-code",
+    "codex",
+    "gemini-cli",
+    "deepseek",
+    "deepseek-harness",
+    "cursor",
+    "trae",
+    "rockdesk",
+    "rds",
+    "远程控制",
+    "远程桌面"
+  ],
+  "homepage": "https://rockdesk.io/ai-agents.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rockdesk-io/rockdesk-skill.git",
+    "directory": "mcp/npm"
+  },
+  "bugs": {
+    "url": "https://github.com/rockdesk-io/rockdesk-skill/discussions"
+  },
+  "author": "RockDesk <dev@rockdesk.io>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  }
+}

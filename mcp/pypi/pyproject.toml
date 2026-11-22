@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rockdesk-mcp"
+version = "1.0.18"
+description = "MCP server for AI agents to control your other computers by a 9-digit RockDesk ID: shell, files, screenshots, mouse and keyboard. Works with Claude Code, Codex, Gemini CLI, DeepSeek Harness, Cursor and Trae. 让 AI 按 ID 远程控制另一台电脑。"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [{name = "RockDesk", email = "dev@rockdesk.io"}]
+keywords = ["mcp", "mcp-server", "model-context-protocol", "remote-desktop", "remote-control", "remote-access", "ai-agent", "computer-use", "claude-code", "codex", "deepseek", "rockdesk", "远程控制", "远程桌面"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Topic :: System :: Networking",
+  "Topic :: Software Development :: Libraries",
+  "Environment :: Console",
+]
+
+[project.urls]
+Homepage = "https://rockdesk.io/ai-agents.html"
+"中文" = "https://rockdesk.cn/ai-agents.html"
+Download = "https://rockdesk.io/#download"
+Source = "https://github.com/rockdesk-io/rockdesk-skill"
+Issues = "https://github.com/rockdesk-io/rockdesk-skill/discussions"
+
+[project.scripts]
+rockdesk-mcp = "rockdesk_mcp:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

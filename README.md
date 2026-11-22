@@ -1,5 +1,7 @@
 # RockDesk skill and MCP server for Claude Code, Codex, Gemini CLI, DeepSeek Harness and other agents
 
+**中文：** RockDesk（磐石远控）让 AI 按 9 位 ID 控制远程电脑——DeepSeek Harness、Claude Code、Codex、Gemini CLI 一行命令接入，跑命令、传文件、截屏、键鼠都行，两台都不需要公网 IP。MCP 服务器也发在 npm 和 PyPI（`npx -y rockdesk-mcp` / `uvx rockdesk-mcp`），详见下方「中文」。
+
 [![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/rockdesk-io/rockdesk-skill) [![Official MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.rockdesk%2Frockdesk-2563eb)](https://rockdesk.io/ai-agents.html) [![Open VSX](https://img.shields.io/badge/Open%20VSX-rockdesk.rockdesk-0f766e)](https://open-vsx.org/extension/rockdesk/rockdesk) [![Homebrew Cask](https://img.shields.io/badge/Homebrew-rockdesk--io%2Ftap-d97706)](https://github.com/rockdesk-io/homebrew-tap)
 
 ```
