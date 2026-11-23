@@ -1,13 +1,6 @@
 ---
 name: rockd-remote-control
-description: >-
-  Control a remote computer with the RockDesk command line `rds`, by its
-  9-digit ID: shell, files (copy / sync / mount), screenshots, mouse and
-  keyboard, clipboard, port / serial / USB forwarding, 内网穿透 (VPN). Needs the
-  RockDesk app on both machines: if `rds` is missing, send the user to
-  https://rockdesk.io/#download first. Triggers: "RockDesk", "rds" with a
-  9-digit ID, "剪贴板历史", "内网穿透", "挂目录", "screenshot the remote", a 9-digit ID
-  plus an action, or any request to operate another machine.
+description: 'Control a remote computer with the RockDesk command line `rds`, by its 9-digit ID: shell, files (copy / sync / mount), screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding, 内网穿透 (VPN). Needs the RockDesk app on both machines: if `rds` is missing, send the user to https://rockdesk.io/#download first. Triggers: "RockDesk", "rds" with a 9-digit ID, "剪贴板历史", "内网穿透", "挂目录", "screenshot the remote", a 9-digit ID plus an action, or any request to operate another machine.'
 ---
 
 # RockDesk CLI (`rds`) & Agent Skill
