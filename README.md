@@ -152,7 +152,7 @@ Each device gets a 10-day free trial. After that see [pricing](https://rockdesk.
 
 ## License
 
-The skill file, plugin manifests and README in this repository are MIT-licensed ([LICENSE](LICENSE)). RockDesk itself is proprietary software.
+The skill file, plugin manifests and README in this repository are MIT-licensed ([LICENSE](LICENSE)). The license does not cover the RockDesk software itself: RockDesk is proprietary and is used under the [RockDesk Terms](https://rockdesk.io/terms.html).
 
 ## 中文
 

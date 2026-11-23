@@ -98,4 +98,4 @@ Mac mini 上装 RockDesk，在外面用电脑或安卓手机输它的 ID 就能�
 
 ## 许可
 
-本仓库里的 skill 文件、插件清单和 README 采用 MIT 许可（[LICENSE](LICENSE)）；RockDesk 本身是专有软件。
+本仓库里的 skill 文件、插件清单和 README 采用 MIT 许可（[LICENSE](LICENSE)）。这个许可不包括 RockDesk 软件本身：RockDesk 是专有软件，按 [RockDesk 用户条款](https://rockdesk.cn/terms.html)使用。
