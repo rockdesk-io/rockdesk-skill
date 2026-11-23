@@ -12,6 +12,8 @@
 
 下载：<https://rockdesk.cn/#download>（海外：<https://rockdesk.io/#download>）。支持 Windows、macOS、Linux（x86_64 / arm64，也支持没有桌面的服务器）和安卓。装好打开一次，每台会显示自己的 9 位 ID。
 
+本机还没装也可以先接上（第 2 步）：这时这个服务只提供 `install_rockdesk`、`rockdesk_status` 两个工具，AI 会先问你要不要安装，你同意后它下载官方安装包装好，再换成下面 18 个工具。要控制的那台电脑得你自己装。
+
 ### 第 2 步：接到你的 AI 工具
 
 | AI 工具 | 接入方式 |
@@ -55,7 +57,7 @@
 
 With this server, AI agents (Claude Code, Codex, Gemini CLI, DeepSeek Harness, Cursor, Trae, Claude Desktop and others) can **control your other computers** by their 9-digit RockDesk ID: run shell commands with real exit codes, copy files, take screenshots, click, type, use the clipboard and forward ports — on Windows, macOS, Linux (x86_64 / arm64, including headless servers) and Android. Peer to peer and end-to-end encrypted; neither machine needs a public IP or an open port, and a relay takes over when a direct path is not possible.
 
-1. **Install RockDesk on both machines:** <https://rockdesk.io/#download>. Open it once to see each machine's 9-digit ID.
+1. **Install RockDesk on both machines:** <https://rockdesk.io/#download>. Open it once to see each machine's 9-digit ID. If it is not installed on this machine yet, you can still add the server first: until RockDesk is there it only offers `install_rockdesk` and `rockdesk_status`, the agent asks whether to install it, and once you agree it downloads the official package, installs it and switches to the 18 RockDesk tools. The machine you control needs RockDesk installed by you.
 2. **Add the server to your agent:**
    - Claude Code: `claude mcp add -s user rockdesk -- uvx rockdesk-mcp`
    - Codex: `codex mcp add rockdesk -- uvx rockdesk-mcp`

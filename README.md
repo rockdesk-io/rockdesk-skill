@@ -110,7 +110,7 @@ claude mcp add -s user rockdesk -- rds mcp      # Claude Code
 codex mcp add rockdesk -- rds mcp               # Codex
 ```
 
-Gemini CLI, Cursor, Claude Desktop, TRAE, Windsurf and other MCP clients take this standard config. It works on macOS, Windows and Linux: `rockdesk-mcp` finds the installed RockDesk by itself. It needs Node.js; with uv, `uvx rockdesk-mcp` works too.
+Gemini CLI, Cursor, Claude Desktop, TRAE, Windsurf and other MCP clients take this standard config. It works on macOS, Windows and Linux: `rockdesk-mcp` finds the installed RockDesk by itself. It needs Node.js; with uv, `uvx rockdesk-mcp` works too. If RockDesk is not installed on this computer yet, it serves an `install_rockdesk` tool instead: the agent asks you first, then downloads the official package, installs it and loads the RockDesk tools.
 
 ```json
 {

@@ -1,5 +1,5 @@
 {
   "name": "rockdesk",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Let Gemini CLI work on your other computers through RockDesk: run shell commands, copy files, take screenshots, click and type, by 9-digit machine ID, peer-to-peer with no open ports. Needs the RockDesk app on both machines: https://rockdesk.io/#download"
 }

@@ -42,15 +42,25 @@ want to control.
   - Windows: https://rockdesk.io/download/latest/windows (an .exe installer). It
     is not code-signed yet. To install it for the user, download it with
     PowerShell (`Invoke-WebRequest <link> -OutFile $env:TEMP\rockdesk-setup.exe`)
-    or curl.exe and run it silently (`Start-Process $env:TEMP\rockdesk-setup.exe
-    -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-' -Wait`): a file
-    downloaded that way has no download mark, so SmartScreen does not stop it. It
-    needs administrator rights, so the user may have to approve a UAC prompt. If
-    the user downloaded it in a browser and Windows says "Windows protected your
-    PC", they click "More info", then "Run anyway".
+    or curl.exe and run it silently: `(Start-Process $env:TEMP\rockdesk-setup.exe
+    -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
+    -PassThru).WaitForExit()` (not `-Wait`: that also waits for the RockDesk app
+    the installer opens at the end, so it never returns). A file downloaded that
+    way has no download mark, so SmartScreen does not stop it. It needs
+    administrator rights, so the user may have to approve a UAC prompt. If the
+    user downloaded it in a browser and Windows says "Windows protected your PC",
+    they click "More info", then "Run anyway".
   - macOS, Apple silicon: https://rockdesk.io/download/latest/macos; Intel:
-    https://rockdesk.io/download/latest/macos-x86_64 (open the .dmg, drag the
-    app into Applications and open it once)
+    https://rockdesk.io/download/latest/macos-x86_64 (a .dmg). To install it for
+    the user: with Homebrew, `brew tap rockdesk-io/tap && brew install --cask
+    rockdesk`; without Homebrew (or in China, where the rockdesk.cn link is
+    faster), download the .dmg for this Mac's chip (`uname -m`: arm64 or x86_64)
+    as `rockdesk.dmg`, then `hdiutil attach -nobrowse -readonly -mountpoint
+    /tmp/rockdesk-dmg rockdesk.dmg && ditto /tmp/rockdesk-dmg/rockd.app
+    /Applications/rockd.app && hdiutil detach /tmp/rockdesk-dmg && open
+    /Applications/rockd.app`. macOS then asks the user to allow Screen Recording
+    and Accessibility for it. By hand: open the .dmg, drag the app into
+    Applications and open it once.
   - Linux x86_64: https://rockdesk.io/download/latest/linux-amd64; arm64:
     https://rockdesk.io/download/latest/linux-arm64 (a .deb:
     `curl -fL -o rockdesk.deb https://rockdesk.io/download/latest/linux-amd64 && sudo apt install ./rockdesk.deb`)
@@ -463,3 +473,7 @@ explains what each one does.
   `{"mcpServers": {"rockdesk": {"command": "rds", "args": ["mcp"]}}}`
 - `rds` is not on the PATH on macOS and Windows: use
   `/Applications/rockd.app/Contents/MacOS/rds` or `C:\Program Files\rockd\rds.exe`.
+- `npx -y rockdesk-mcp` (npm) or `uvx rockdesk-mcp` (PyPI) start the same server and find
+  `rds` on every system by themselves. If RockDesk is not installed yet, they serve an
+  `install_rockdesk` tool instead: once the user agrees, it installs RockDesk and loads
+  the RockDesk tools.

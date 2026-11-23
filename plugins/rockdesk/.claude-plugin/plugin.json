@@ -1,7 +1,7 @@
 {
   "name": "rockdesk",
   "displayName": "RockDesk",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Let your agent work on your other computers through RockDesk's rds command line: shell with real exit codes, files, screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding. Peer-to-peer by machine ID, no open ports. Needs the RockDesk app on both machines: https://rockdesk.io/#download (in China: https://rockdesk.cn/#download).",
   "author": {
     "name": "RockDesk",

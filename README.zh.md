@@ -25,7 +25,7 @@ RockDesk 给每台电脑一个 9 位 ID，按 ID 点对点连接（打不通时�
 | Trae、Cursor、Windsurf、千问、WorkBuddy 等 | `npx skills add rockdesk-io/rockdesk-skill`，或标准 stdio MCP：`{"command": "rds", "args": ["mcp"]}` |
 | 只要 MCP 服务器 | `npx -y rockdesk-mcp`（npm）或 `uvx rockdesk-mcp`（PyPI），它们会调用本机装好的 RockDesk |
 
-Cursor、Claude Desktop、Trae、Windsurf 等用 JSON 配置 MCP 的客户端，填下面这段就行，macOS、Windows、Linux 通用：`rockdesk-mcp` 会自己找到本机装好的 RockDesk。需要装 Node.js；装了 uv 的也可以用 `uvx rockdesk-mcp`。
+Cursor、Claude Desktop、Trae、Windsurf 等用 JSON 配置 MCP 的客户端，填下面这段就行，macOS、Windows、Linux 通用：`rockdesk-mcp` 会自己找到本机装好的 RockDesk。需要装 Node.js；装了 uv 的也可以用 `uvx rockdesk-mcp`。本机还没装 RockDesk 的话，它会先提供一个 `install_rockdesk` 工具：AI 先问你，你同意后它下载官方安装包装好，再换成 RockDesk 的工具。
 
 ```json
 {
