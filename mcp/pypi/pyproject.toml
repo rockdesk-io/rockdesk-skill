@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rockdesk-mcp"
-version = "1.0.18"
+version = "1.0.18.post1"
 description = "MCP server for AI agents to control your other computers by a 9-digit RockDesk ID: shell, files, screenshots, mouse and keyboard. Works with Claude Code, Codex, Gemini CLI, DeepSeek Harness, Cursor and Trae. 让 AI 按 ID 远程控制另一台电脑。"
 readme = "README.md"
 requires-python = ">=3.8"

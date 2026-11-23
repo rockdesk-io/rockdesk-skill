@@ -1,5 +1,7 @@
 # rockdesk-mcp：让 AI 按 ID 远程控制另一台电脑
 
+<!-- mcp-name: io.rockdesk/rockdesk -->
+
 **rockdesk-mcp** starts the MCP server built into **RockDesk（磐石远控）**, so AI agents can control your other computers by a 9-digit ID. English below.
 
 ## 中文

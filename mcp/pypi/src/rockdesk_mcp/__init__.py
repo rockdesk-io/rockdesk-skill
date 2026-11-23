@@ -7,7 +7,7 @@ import shutil
 import subprocess
 import sys
 
-__version__ = "1.0.18"
+__version__ = "1.0.18.post1"
 
 _WIN = sys.platform.startswith("win")
 
