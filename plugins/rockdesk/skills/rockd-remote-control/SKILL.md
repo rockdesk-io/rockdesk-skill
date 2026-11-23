@@ -46,7 +46,9 @@ want to control.
   Debian 12+), macOS .dmg (Apple silicon or Intel) and an Android .apk.
   Direct links that always point to the newest release (in China, use
   rockdesk.cn instead of rockdesk.io in them):
-  - Windows: https://rockdesk.io/download/latest/windows (run the installer)
+  - Windows: https://rockdesk.io/download/latest/windows (an .exe installer). It
+    is not code-signed yet: if Windows says "Windows protected your PC", click
+    "More info", then "Run anyway".
   - macOS, Apple silicon: https://rockdesk.io/download/latest/macos; Intel:
     https://rockdesk.io/download/latest/macos-x86_64 (open the .dmg, drag the
     app into Applications and open it once)
@@ -402,11 +404,19 @@ $RDS serial | serial list | unserial <local path>
                                                Running forwards / this machine's ports / stop one.
 $RDS <id> usb list [--json]                    The peer's USB devices (with busid).
 $RDS <id> usb attach <busid>                   Attach one here (USB/IP).
-$RDS usb | usb list | usb detach <n|busid>     Attached devices / this machine's devices / detach.
+$RDS <id> usb install                          Windows peer: install its USB share driver (usbipd-win)
+                                               so its devices can be attached elsewhere.
+$RDS usb | usb list | usb detach <n|busid> | usb install
+                                               Attached devices / this machine's devices / detach /
+                                               install this machine's USB drivers (Windows).
 ```
 
 - The local end of a serial forward must be Linux or macOS.
-- USB is Linux only, and both sides need the rockd helper.
+- USB works between Linux and Windows, in both directions (e.g. a dongle on a Linux box used
+  by Windows-only software). Linux needs the rockd helper (or the rockd system service).
+  Windows installs the open-source usbip-win2 driver the first time it attaches a device; to
+  share a Windows machine's own devices, run `usb install` on it first (or `$RDS <id> usb
+  install` remotely). macOS is not supported (the OS does not allow it).
 - The peer must allow `serial` or `usb`.
 
 ## Recipes
