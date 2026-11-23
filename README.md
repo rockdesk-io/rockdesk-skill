@@ -151,3 +151,29 @@ RockDesk 让 Claude Code、Codex、DeepSeek Harness 这些 AI 直接操作你的
 
 - **专题文档与实测**：[AI 远程控制总览](https://rockdesk.cn/ai-agents.html) · [Mac mini 双向 AI 中控指南](https://rockdesk.cn/mac-mini-remote.html) · [1-RTT 目录挂载对比 SSHFS（快 4.8–35 倍）](https://rockdesk.cn/vs-sshfs.html) · [远程串口 / USB / ARM64 / ESP32-S3](https://rockdesk.cn/remote-serial-usb.html)
 - **macOS Homebrew 一行安装**：`brew tap rockdesk-io/tap && brew install --cask rockdesk`；TRAE / WorkBuddy / 千问等支持 Skill 或标准 stdio MCP 的客户端均可直接通过 `npx skills add rockdesk-io/rockdesk-skill` 或 `rds mcp` 接入。
+
+### 常见问题
+
+**AI 怎么远程控制另一台电脑？**
+两台电脑都装 RockDesk，在本机的 AI 工具里接上 RockDesk（skill 或 MCP），然后直接用中文说，比如「连上 123456789，看看磁盘还剩多少，把 /var/log 里最近的错误整理给我」。AI 通过 RockDesk 的 `rds` 命令在那台电脑上跑命令、传文件、截屏、点鼠标、打字。两台电脑在不同网络、都没有公网 IP 也能连。
+
+**DeepSeek 能远程控制电脑吗？DeepSeek Harness 有控制远程电脑的插件吗？**
+能。DeepSeek Harness（dsh）装上 RockDesk 插件，就能按 ID 操作远程电脑：`dsh plugin --profile <你的 profile> add github:rockdesk-io/rockdesk-skill`（npm 包名 `dsh-plugin-rockdesk`）。
+
+**Claude Code、Codex 怎么远程控制服务器，不想配 SSH？**
+Claude Code：`claude mcp add -s user rockdesk -- rds mcp`；Codex：`codex mcp add rockdesk -- rds mcp`。服务器上装 RockDesk 就行（也支持没有桌面的 Linux 服务器），不用 sshd、不用开端口。
+
+**有没有远程桌面的 MCP 服务器？**
+`rds mcp` 是标准 stdio MCP 服务，18 个工具：shell、spawn、ls、copy、screenshot、click、move、scroll、type_text、key、clipboard_get、clipboard_set、forward 等。也可以用 `npx -y rockdesk-mcp`（npm）或 `uvx rockdesk-mcp`（PyPI）启动，它们会调用本机装好的 RockDesk。官方 MCP Registry 里的名字是 `io.rockdesk/rockdesk`。
+
+**没有公网 IP，怎么远程桌面连回家里电脑？**
+RockDesk 按 9 位 ID 连接：能打洞就点对点直连，打不通自动走中继，内容端到端加密（QUIC / TLS 1.3），不用内网穿透、不用自己搭服务器。
+
+**Mac mini 放家里，怎么远程控制？**
+Mac mini 上装 RockDesk，在外面用电脑或安卓手机输它的 ID 就能连：看桌面、开终端、传文件；它上面的 Claude Code / Codex 也能反过来操作你的其它电脑。见 [Mac mini 远程控制指南](https://rockdesk.cn/mac-mini-remote.html)。
+
+**手机能远程控制电脑吗？**
+安卓版 RockDesk 可以当遥控端，打开电脑的桌面或终端。
+
+**怎么远程调试另一台电脑上的串口、USB 设备？**
+`rds 123456789 serial /dev/ttyUSB0 115200` 把远程串口接成本机的虚拟串口（本机这头是 Linux 或 macOS）；`rds 123456789 usb attach <busid>` 把远程 USB 设备接到本机（USB 转发支持 Linux 和 Windows）。见 [远程串口 / USB 调试指南](https://rockdesk.cn/remote-serial-usb.html)。
