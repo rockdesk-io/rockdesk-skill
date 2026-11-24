@@ -96,6 +96,15 @@ Mac mini 上装 RockDesk，在外面用电脑或安卓手机输它的 ID 就能�
 
 每台新设备有 10 天免费试用，之后见 [价格页](https://rockdesk.cn/pricing.html)。
 
+## MCP 服务（源码在本仓库）
+
+MCP 服务 rockdesk-mcp 的源码就在本仓库：[`mcp/npm/bin/rockdesk-mcp.js`](mcp/npm/bin/rockdesk-mcp.js)（npm 版）和 [`mcp/pypi/src/rockdesk_mcp`](mcp/pypi/src/rockdesk_mcp)（PyPI 版），也就是官方 MCP 目录里的 `io.rockdesk/rockdesk`。它是标准 stdio MCP 服务：
+
+- 装了 RockDesk 时，经 RockDesk 应用自带的引擎（`rds mcp`，点对点连接由它负责）提供 18 个工具：`status`、`devices`、`ping`、`shell`、`spawn`、`ls`、`copy`、`info`、`screenshot`、`click`、`move`、`scroll`、`type_text`、`key`、`clipboard_get`、`clipboard_set`、`forward`、`unforward`。
+- 还没装 RockDesk 时，提供 `rockdesk_status` 和 `install_rockdesk`，AI 会先问你要不要安装。
+
+从源码运行：`node mcp/npm/bin/rockdesk-mcp.js`，或者 `PYTHONPATH=mcp/pypi/src python3 -m rockdesk_mcp`。[Dockerfile](Dockerfile) 把它和 RockDesk 一起装进 Linux 镜像，MCP 目录可以直接起它看工具列表。
+
 ## 许可
 
-本仓库里的 skill 文件、插件清单和 README 采用 MIT 许可（[LICENSE](LICENSE)）。这个许可不包括 RockDesk 软件本身：RockDesk 是专有软件，按 [RockDesk 用户条款](https://rockdesk.cn/terms.html)使用。
+本仓库里的东西都采用 MIT 许可（[LICENSE](LICENSE)）：skill 文件、MCP 服务 rockdesk-mcp 的源码（`mcp/` 目录）、插件清单和 README。这个许可不包括 RockDesk 软件本身：RockDesk 是专有软件，按 [RockDesk 用户条款](https://rockdesk.cn/terms.html)使用。

@@ -20,7 +20,7 @@ Let your AI agent work on your **other** computers.
 - read and set the clipboard, browse clipboard history
 - forward TCP ports, serial ports and USB devices, or bring up a VPN into the remote's network
 
-This repository holds the skill that teaches agents to use it.
+This repository holds the skill that teaches agents to use it, and the source of the **rockdesk-mcp** MCP server (Node.js in [`mcp/npm`](mcp/npm), Python in [`mcp/pypi`](mcp/pypi)), published on npm and PyPI and listed as `io.rockdesk/rockdesk` in the official MCP Registry. See [MCP server](#mcp-server).
 
 Demo: [Claude Code drives a Windows PC](https://youtu.be/VIFOqMNGUW8) · [Claude Code drives a Mac](https://youtu.be/uddhlpvHFV0)
 
@@ -127,6 +127,15 @@ Or point the client at RockDesk itself (no Node.js needed): `{"command": "rds", 
 
 If RockDesk isn't installed yet, the skill tells your agent to point you to the download page (or offer to install it for you).
 
+## MCP server
+
+The source of `rockdesk-mcp` is in this repository: [`mcp/npm/bin/rockdesk-mcp.js`](mcp/npm/bin/rockdesk-mcp.js) (npm) and [`mcp/pypi/src/rockdesk_mcp`](mcp/pypi/src/rockdesk_mcp) (PyPI). It is a stdio MCP server:
+
+- With RockDesk installed, it serves RockDesk's 18 tools (`status`, `devices`, `ping`, `shell`, `spawn`, `ls`, `copy`, `info`, `screenshot`, `click`, `move`, `scroll`, `type_text`, `key`, `clipboard_get`, `clipboard_set`, `forward`, `unforward`) through the engine built into the RockDesk app (`rds mcp`), which makes the peer-to-peer connections.
+- Without RockDesk, it serves `rockdesk_status` and `install_rockdesk`, and the agent asks you before installing RockDesk.
+
+Run it from source with `node mcp/npm/bin/rockdesk-mcp.js` or `PYTHONPATH=mcp/pypi/src python3 -m rockdesk_mcp`. The [Dockerfile](Dockerfile) builds it together with RockDesk for Linux, so an MCP directory can start it and list the tools.
+
 ## Things to ask
 
 - "123 456 789 is my office PC. How much space is left on C:, and how long has it been up?"
@@ -152,7 +161,7 @@ Each device gets a 10-day free trial. After that see [pricing](https://rockdesk.
 
 ## License
 
-The skill file, plugin manifests and README in this repository are MIT-licensed ([LICENSE](LICENSE)). The license does not cover the RockDesk software itself: RockDesk is proprietary and is used under the [RockDesk Terms](https://rockdesk.io/terms.html).
+Everything in this repository is MIT-licensed ([LICENSE](LICENSE)): the skill, the source of the rockdesk-mcp MCP server in `mcp/`, the plugin manifests and this README. The license does not cover the RockDesk software itself: RockDesk is proprietary and is used under the [RockDesk Terms](https://rockdesk.io/terms.html).
 
 ## 中文
 
@@ -164,6 +173,8 @@ RockDesk 让 Claude Code、Codex、DeepSeek Harness 这些 AI 直接操作你的
 
 - **专题文档与实测**：[AI 远程控制总览](https://rockdesk.cn/ai-agents.html) · [Mac mini 双向 AI 中控指南](https://rockdesk.cn/mac-mini-remote.html) · [1-RTT 目录挂载对比 SSHFS（快 4.8–35 倍）](https://rockdesk.cn/vs-sshfs.html) · [远程串口 / USB / ARM64 / ESP32-S3](https://rockdesk.cn/remote-serial-usb.html)
 - **macOS Homebrew 一行安装**：`brew tap rockdesk-io/tap && brew install --cask rockdesk`；TRAE / WorkBuddy / 千问等支持 Skill 或标准 stdio MCP 的客户端均可直接通过 `npx skills add rockdesk-io/rockdesk-skill` 或 `rds mcp` 接入。
+
+本仓库里还有 MCP 服务 rockdesk-mcp 的源码（[mcp/npm](mcp/npm)、[mcp/pypi](mcp/pypi)，MIT 许可），也就是官方 MCP 目录里的 `io.rockdesk/rockdesk`：装了 RockDesk 时提供 18 个工具，没装时提供 `rockdesk_status`、`install_rockdesk`（装之前先问你）。
 
 ### 常见问题
 
