@@ -53,9 +53,31 @@ Demo: [Claude Code drives a Windows PC](https://youtu.be/VIFOqMNGUW8) · [Claude
 
 Direct links that always point to the newest release: [Windows](https://rockdesk.io/download/latest/windows) · [macOS, Apple silicon](https://rockdesk.io/download/latest/macos) · [macOS, Intel](https://rockdesk.io/download/latest/macos-x86_64) · [Linux x86_64 .deb](https://rockdesk.io/download/latest/linux-amd64) · [Linux arm64 .deb](https://rockdesk.io/download/latest/linux-arm64) · [Android .apk](https://rockdesk.io/download/latest/android). In China, use rockdesk.cn instead of rockdesk.io in these links. On macOS (Homebrew): `brew tap rockdesk-io/tap && brew install --cask rockdesk` ([homebrew-tap](https://github.com/rockdesk-io/homebrew-tap)). On Linux: `curl -fL -o rockdesk.deb https://rockdesk.io/download/latest/linux-amd64 && sudo apt install ./rockdesk.deb`.
 
-### 2. Install the skill in your agent
+### 2. Connect your agent: MCP server or skill
 
-**Any agent, with the skills CLI** (puts it in `~/.agents/skills` and links it to the agents you pick):
+**As an MCP server**, for any MCP client. `rds mcp` (RockDesk 1.0.3 and later) is an MCP server over stdio with 18 tools: shell, spawn, copy, ls, screenshot, click, type_text, key, scroll, clipboard, port forwarding and more; screenshots come back as images.
+
+```
+claude mcp add -s user rockdesk -- rds mcp      # Claude Code
+codex mcp add rockdesk -- rds mcp               # Codex
+```
+
+Gemini CLI, Cursor, Claude Desktop, TRAE, Windsurf and other MCP clients take this standard config. It works on macOS, Windows and Linux: `rockdesk-mcp` finds the installed RockDesk by itself. It needs Node.js; with uv, `uvx rockdesk-mcp` works too. If RockDesk is not installed on this computer yet, it serves an `install_rockdesk` tool instead: the agent asks you first, then downloads the official package, installs it and loads the RockDesk tools.
+
+```json
+{
+  "mcpServers": {
+    "rockdesk": {
+      "command": "npx",
+      "args": ["-y", "rockdesk-mcp"]
+    }
+  }
+}
+```
+
+Or point the client at RockDesk itself (no Node.js needed): `{"command": "rds", "args": ["mcp"]}`. On macOS and Windows `rds` is not on the PATH: use `/Applications/rockd.app/Contents/MacOS/rds` or `C:\Program Files\rockd\rds.exe`.
+
+**Or as a skill**, for any agent, with the skills CLI (puts it in `~/.agents/skills` and links it to the agents you pick):
 
 ```
 npx skills add rockdesk-io/rockdesk-skill
@@ -105,28 +127,6 @@ $skill-installer install https://github.com/rockdesk-io/rockdesk-skill/tree/main
 ```
 
 **Or by hand:** copy `skills/rockd-remote-control/` into `~/.claude/skills/` (Claude Code), `~/.gemini/skills/` (Gemini CLI) or `~/.agents/skills/` (Codex, DeepSeek Harness — dsh does not read `~/.claude/skills`).
-
-**Or connect it as an MCP server** — use whichever you prefer. `rds mcp` (RockDesk 1.0.3 and later) is an MCP server over stdio with 18 tools: shell, spawn, copy, ls, screenshot, click, type_text, key, scroll, clipboard, port forwarding and more; screenshots come back as images.
-
-```
-claude mcp add -s user rockdesk -- rds mcp      # Claude Code
-codex mcp add rockdesk -- rds mcp               # Codex
-```
-
-Gemini CLI, Cursor, Claude Desktop, TRAE, Windsurf and other MCP clients take this standard config. It works on macOS, Windows and Linux: `rockdesk-mcp` finds the installed RockDesk by itself. It needs Node.js; with uv, `uvx rockdesk-mcp` works too. If RockDesk is not installed on this computer yet, it serves an `install_rockdesk` tool instead: the agent asks you first, then downloads the official package, installs it and loads the RockDesk tools.
-
-```json
-{
-  "mcpServers": {
-    "rockdesk": {
-      "command": "npx",
-      "args": ["-y", "rockdesk-mcp"]
-    }
-  }
-}
-```
-
-Or point the client at RockDesk itself (no Node.js needed): `{"command": "rds", "args": ["mcp"]}`. On macOS and Windows `rds` is not on the PATH: use `/Applications/rockd.app/Contents/MacOS/rds` or `C:\Program Files\rockd\rds.exe`.
 
 If RockDesk isn't installed yet, the skill tells your agent to point you to the download page (or offer to install it for you).
 
