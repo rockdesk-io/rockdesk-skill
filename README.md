@@ -7,10 +7,11 @@ Let Claude Code, Codex or any MCP client control another computer: run shell com
 [![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/rockdesk-io/rockdesk-skill) [![Official MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.rockdesk%2Frockdesk-2563eb)](https://rockdesk.io/ai-agents.html) [![Open VSX](https://img.shields.io/badge/Open%20VSX-rockdesk.rockdesk-0f766e)](https://open-vsx.org/extension/rockdesk/rockdesk) [![Homebrew Cask](https://img.shields.io/badge/Homebrew-rockdesk--io%2Ftap-d97706)](https://github.com/rockdesk-io/homebrew-tap)
 
 ```
-npx skills add rockdesk-io/rockdesk-skill
+npx -y rockdesk-mcp                          # MCP server (stdio) for any MCP client
+npx skills add rockdesk-io/rockdesk-skill    # or install it as an agent skill
 ```
 
-**Needs the RockDesk app on both machines** — the skill only teaches your agent the commands; RockDesk does the work. [Download RockDesk](https://rockdesk.io/#download) (in China: [rockdesk.cn](https://rockdesk.cn/#download)).
+**Needs the RockDesk app on both machines** — the MCP server and the skill only give your agent the commands; RockDesk does the work. [Download RockDesk](https://rockdesk.io/#download) (in China: [rockdesk.cn](https://rockdesk.cn/#download)).
 
 Let your AI agent work on your **other** computers.
 
