@@ -1,6 +1,8 @@
 # RockDesk skill and MCP server for Claude Code, Codex, Gemini CLI, DeepSeek Harness and other agents
 
-**中文：** RockDesk（磐石远控）让 AI 按 9 位 ID 控制远程电脑——DeepSeek Harness、Claude Code、Codex、Gemini CLI 一行命令接入，跑命令、传文件、截屏、键鼠都行，两台都不需要公网 IP。MCP 服务器也发在 npm 和 PyPI（`npx -y rockdesk-mcp` / `uvx rockdesk-mcp`），详见下方「中文」。 完整中文说明：[README.zh.md](README.zh.md)。
+Let Claude Code, Codex or any MCP client control another computer: run shell commands, read and write files, mount its folders, take screenshots, move the mouse and type, on Windows, macOS, Linux or Android. Connect by a 9-digit RockDesk ID; neither machine needs a public IP or an open port on the router. Install the RockDesk app on both computers first ([download](https://rockdesk.io/#download)).
+
+**中文：** 让 Claude Code、Codex、DeepSeek、Trae 等 AI agent 控制另一台电脑：跑命令、读写文件、挂目录、截屏、动鼠标、打字，Windows / macOS / Linux / 安卓都行。按 9 位 RockDesk ID 连，两台都不需要公网 IP、不用在路由器上开端口；两台都先装好 RockDesk（[下载](https://rockdesk.cn/#download)）。MCP 服务器也发在 npm 和 PyPI（`npx -y rockdesk-mcp` / `uvx rockdesk-mcp`），详见下方「中文」。 完整中文说明：[README.zh.md](README.zh.md)。
 
 [![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/rockdesk-io/rockdesk-skill) [![Official MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.rockdesk%2Frockdesk-2563eb)](https://rockdesk.io/ai-agents.html) [![Open VSX](https://img.shields.io/badge/Open%20VSX-rockdesk.rockdesk-0f766e)](https://open-vsx.org/extension/rockdesk/rockdesk) [![Homebrew Cask](https://img.shields.io/badge/Homebrew-rockdesk--io%2Ftap-d97706)](https://github.com/rockdesk-io/homebrew-tap)
 
@@ -12,7 +14,7 @@ npx skills add rockdesk-io/rockdesk-skill
 
 Let your AI agent work on your **other** computers.
 
-[RockDesk](https://rockdesk.io) gives every machine a 9-digit ID and connects them peer-to-peer, falling back to a relay when a direct path isn't possible. No port forwarding, no VPN setup, no sshd on the remote. Its command line, `rds`, lets an agent:
+[RockDesk](https://rockdesk.io) gives every machine a 9-digit ID and connects them peer-to-peer, falling back to a relay when a direct path isn't possible. No public IP, nothing to open on your router, no server to set up and no sshd on the remote; port forwarding and VPN are built in. Its command line, `rds`, lets an agent:
 
 - run commands on the other machine and get real exit codes (`shell -c`), or start long jobs that outlive the call
 - copy, sync and send files, or mount a remote folder as a local one

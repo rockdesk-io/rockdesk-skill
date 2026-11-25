@@ -10,7 +10,7 @@ RockDesk 给每台电脑一个 9 位 ID，按 ID 点对点连接（打不通时�
 - 读写剪贴板、翻剪贴板历史
 - 转发 TCP 端口、串口、USB 设备，或者开内网穿透进入对方的局域网
 
-两台电脑都不需要公网 IP，不用开端口，不用配 VPN 或 SSH。
+两台电脑都不需要公网 IP，不用在路由器上开端口，不用自己搭服务器，也不用装 SSH；端口转发、内网穿透都自带。
 
 **先在两台电脑上都装好 RockDesk**（下载：[rockdesk.cn](https://rockdesk.cn/#download)）：Windows、macOS（Apple 芯片和 Intel）、Linux（x86_64 和 arm64，也支持没有桌面的服务器）、安卓。这个仓库里的 skill 只是教 AI 怎么用命令，真正干活的是 RockDesk。
 
@@ -81,7 +81,7 @@ Claude Code：`claude mcp add -s user rockdesk -- rds mcp`；Codex：`codex mcp 
 `rds mcp` 就是，18 个工具见上表。也可以用 `npx -y rockdesk-mcp` 或 `uvx rockdesk-mcp` 启动。官方 MCP Registry 里的名字是 `io.rockdesk/rockdesk`。
 
 **没有公网 IP，怎么远程桌面连回家里电脑？**
-RockDesk 按 9 位 ID 连接：能打洞就点对点直连，打不通自动走中继，内容端到端加密，不用内网穿透、不用自己搭服务器。
+RockDesk 按 9 位 ID 连接：能打洞就点对点直连，打不通自动走中继，内容端到端加密，不需要公网 IP，不用自己搭服务器，端口转发、内网穿透都自带。
 
 **Mac mini 放家里，怎么远程控制？**
 Mac mini 上装 RockDesk，在外面用电脑或安卓手机输它的 ID 就能连：看桌面、开终端、传文件；它上面的 Claude Code / Codex 也能反过来操作你的其它电脑。见 [Mac mini 远程控制指南](https://rockdesk.cn/mac-mini-remote.html)。
