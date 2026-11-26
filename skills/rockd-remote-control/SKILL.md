@@ -1,6 +1,6 @@
 ---
 name: rockd-remote-control
-description: 'Control a remote computer with the RockDesk command line `rds`, by its 9-digit ID: shell, files (copy / sync / mount), screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding, 内网穿透 (VPN). Needs the RockDesk app on both machines: if `rds` is missing, send the user to https://rockdesk.io/#download first. Triggers: "RockDesk", "rds" with a 9-digit ID, "剪贴板历史", "内网穿透", "挂目录", "screenshot the remote", a 9-digit ID plus an action, or any request to operate another machine.'
+description: 'Control a remote computer with the RockDesk command line `rds`, by its 9-digit ID: shell, files (copy / sync / mount), screenshots, mouse and keyboard, clipboard, port / serial / USB forwarding, 内网穿透 (VPN), its browser over CDP. Needs the RockDesk app on both machines: if `rds` is missing, send the user to https://rockdesk.io/#download first. Triggers: "RockDesk", "rds" with a 9-digit ID, "剪贴板历史", "内网穿透", "挂目录", "用那台的浏览器", a 9-digit ID plus an action, or any request to operate another machine.'
 ---
 
 # RockDesk CLI (`rds`) & Agent Skill
@@ -87,7 +87,8 @@ want to control.
 
 - **Check:** `rds status` prints `本机 <name>（…）  ID <ID>  服务器 已连`
   followed by the live connections. If it says `连不上本机的 rockd（…）：后台没起来？`,
-  the daemon is not running: start the RockDesk app, or with the .deb run
+  the daemon is not running: start the RockDesk app. The Linux .deb (1.0.20 and later) installs the
+  `rockd` system service: `sudo systemctl start rockd`; an older .deb runs it per user:
   `systemctl --user start rockd`. On Windows it is the `rockd` system service.
 - Put its path in a variable and always use it: `RDS=/path/to/rds`.
   Everything below is written as `$RDS`.
@@ -106,6 +107,11 @@ want to control.
   (`cd … && grep … | head`) rather than many calls.
 - **GUI work: observe → act → verify.** Take a screenshot to a file, read the
   image, find the pixel, act, then take another screenshot. Never click blind.
+- **Browser tasks: CDP, not pixels.** When the user wants something done in a
+  browser on the peer (open a page, click, fill, read), drive Chrome over its
+  DevTools protocol through `rds forward` (see Browser on the peer). Start Chrome
+  and set up the port and the forward yourself; the user only names the machine
+  and the task.
 - **Permissions come from the peer.** If a command is refused, don't retry in a
   loop. Tell the user what the peer has to allow (see Authorization).
 - **Safety.**
@@ -380,6 +386,38 @@ $RDS <id> unforward <local>    Stop one.
 
 The peer must allow `fwd`.
 
+## Browser on the peer (远端浏览器 · Chrome DevTools / CDP)
+
+1. **Find or start a Chrome with a debugging port on the peer.**
+   - Already one? `$RDS <id> shell -c "ss -ltnp | grep -i chrom"` (Linux),
+     `lsof -nP -iTCP -sTCP:LISTEN | grep -i chrom` (macOS).
+   - If not, start one with its own profile. Chrome refuses remote debugging on
+     the default profile, so this window is not signed in to the user's accounts:
+     ```
+     $RDS <id> spawn 'google-chrome --remote-debugging-port=9222 --user-data-dir=$HOME/.rd-chrome --no-first-run --no-default-browser-check'
+     ```
+     On Linux and macOS, rds runs it as the logged-in user in their desktop
+     session, so the window shows on the peer's screen.
+     On macOS use `open -na "Google Chrome" --args …` with the same flags.
+   - Chrome may show a terms, sign-in or keyring dialog. Don't accept terms or
+     type a password for the user; ask them.
+2. **Forward the port:** `$RDS <id> forward 19222:127.0.0.1:9222`. Use a local
+   port other than 9222 so it can't collide with a Chrome on this machine.
+3. **Drive it from this machine:**
+   - `GET http://127.0.0.1:19222/json/version` returns WebSocket URLs that
+     already use the local port.
+   - New tab: `PUT http://127.0.0.1:19222/json/new?https://example.com` (Chrome
+     wants PUT here).
+   - Then `Runtime.evaluate`, `Input.*` or `Page.captureScreenshot` over the
+     tab's `webSocketDebuggerUrl`, or `connectOverCDP("http://127.0.0.1:19222")`
+     in Playwright or Puppeteer.
+   - **Connect without an `Origin` header.** Chrome answers 403 to a WebSocket
+     that sends one (Python `websocket-client`: pass `suppress_origin=True`).
+     Don't start Chrome with `--remote-allow-origins=*`: any web page could then
+     take over that browser.
+4. **Clean up:** `$RDS <id> unforward 19222`. Close a Chrome you started
+   (`Browser.close` over CDP). Leave the user's own windows alone.
+
 ## VPN / 内网穿透
 
 ```
@@ -440,6 +478,8 @@ $RDS usb | usb list | usb detach <n|busid> | usb install
   `$RDS <id> clip history send n`.
 - **Get a screenshot of the peer:** `$RDS <id> screenshot -o shot.png`, then
   read `shot.png`.
+- **Do something in the peer's browser:** debugging port + `forward` + CDP, as in
+  Browser on the peer.
 
 ## Installing this skill, or using MCP instead
 
