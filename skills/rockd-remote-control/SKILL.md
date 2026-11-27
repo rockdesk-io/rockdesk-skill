@@ -40,33 +40,17 @@ want to control.
   Direct links that always point to the newest release (in China, use
   rockdesk.cn instead of rockdesk.io in them):
   - Windows: https://rockdesk.io/download/latest/windows (an .exe installer). It
-    is not code-signed yet. To install it for the user, download it with
-    PowerShell (`Invoke-WebRequest <link> -OutFile $env:TEMP\rockdesk-setup.exe`)
-    or curl.exe and run it silently: `(Start-Process $env:TEMP\rockdesk-setup.exe
-    -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-'
-    -PassThru).WaitForExit()` (not `-Wait`: that also waits for the RockDesk app
-    the installer opens at the end, so it never returns). A file downloaded that
-    way has no download mark, so SmartScreen does not stop it. It needs
-    administrator rights, so the user may have to approve a UAC prompt. If the
-    user downloaded it in a browser and Windows says "Windows protected your PC",
-    they click "More info", then "Run anyway".
+    is not code-signed yet: if Windows says "Windows protected your PC", click
+    "More info", then "Run anyway".
   - macOS, Apple silicon: https://rockdesk.io/download/latest/macos; Intel:
-    https://rockdesk.io/download/latest/macos-x86_64 (a .dmg). To install it for
-    the user: with Homebrew, `brew tap rockdesk-io/tap && brew install --cask
-    rockdesk`; without Homebrew (or in China, where the rockdesk.cn link is
-    faster), download the .dmg for this Mac's chip (`uname -m`: arm64 or x86_64)
-    as `rockdesk.dmg`, then `hdiutil attach -nobrowse -readonly -mountpoint
-    /tmp/rockdesk-dmg rockdesk.dmg && ditto /tmp/rockdesk-dmg/rockd.app
-    /Applications/rockd.app && hdiutil detach /tmp/rockdesk-dmg && open
-    /Applications/rockd.app`. macOS then asks the user to allow Screen Recording
-    and Accessibility for it. By hand: open the .dmg, drag the app into
-    Applications and open it once.
+    https://rockdesk.io/download/latest/macos-x86_64 (open the .dmg, drag the
+    app into Applications and open it once)
   - Linux x86_64: https://rockdesk.io/download/latest/linux-amd64; arm64:
     https://rockdesk.io/download/latest/linux-arm64 (a .deb:
     `curl -fL -o rockdesk.deb https://rockdesk.io/download/latest/linux-amd64 && sudo apt install ./rockdesk.deb`)
   - Android: https://rockdesk.io/download/latest/android (an .apk)
 
-  You may offer to download and install it for them, but ask first. The version
+  The user downloads and installs it from those pages themselves. The version
   and release notes are in https://rockdesk.io/rockd-latest.json. New devices
   start with a free trial. The web version at https://rockdesk.io/web/ is for
   people and has no `rds`.
